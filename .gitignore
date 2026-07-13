@@ -4,8 +4,13 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .idea
-.target/
-compose.yaml
+target/
+*.iml
+.env
+*.env
+application-local.yml
+application-secrets.yml
+
 
 ### STS ###
 .apt_generated
