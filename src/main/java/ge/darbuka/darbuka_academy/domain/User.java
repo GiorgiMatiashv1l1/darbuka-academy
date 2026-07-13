@@ -1,7 +1,10 @@
 package ge.darbuka.darbuka_academy.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 import java.lang.annotation.Target;
 import java.time.Instant;
@@ -32,4 +35,5 @@ public class User {
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
+
 }

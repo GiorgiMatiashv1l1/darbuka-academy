@@ -12,3 +12,8 @@ spring:
 logging:
   level:
     org.flywaydb: DEBUG
+
+app:
+  admin:
+    email: ${ADMIN_EMAIL}
+    password: ${ADMIN_PASSWORD}
