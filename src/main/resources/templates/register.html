@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-950 text-neutral-100 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-sm p-8">
+    <h1 class="text-2xl font-semibold mb-6">Create an account</h1>
+
+    <p th:if="${error}" th:text="${error}" class="mb-4 text-sm text-red-400"></p>
+
+    <form th:action="@{/register}" method="post" class="space-y-4">
+        <input type="text" name="fullName" placeholder="Full name" required
+               class="w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        <input type="email" name="email" placeholder="Email" required
+               class="w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        <input type="password" name="password" placeholder="Password" required minlength="8"
+               class="w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        <button type="submit"
+                class="w-full py-2 bg-amber-500 text-neutral-950 font-medium rounded hover:bg-amber-400">
+            Register
+        </button>
+    </form>
+
+    <p class="mt-6 text-sm text-neutral-400">
+        Already have one?
+        <a th:href="@{/login}" class="text-amber-500 hover:underline">Log in</a>
+    </p>
+</div>
+
+</body>
+</html>
