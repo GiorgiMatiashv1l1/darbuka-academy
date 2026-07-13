@@ -25,7 +25,7 @@ public class Purchase {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private PurchaseStatus purchaseStatus;
+    private PurchaseStatus status;
 
     @Column(name = "stripe_session_id", unique = true)
     private String stripeSessionId;
