@@ -27,8 +27,8 @@ public class Purchase {
     @Column(name = "status", nullable = false)
     private PurchaseStatus status;
 
-    @Column(name = "stripe_session_id", unique = true)
-    private String stripeSessionId;
+    @Column(name = "provider_session_id", unique = true)
+    private String providerSessionId;
 
     @Column(name = "amount_cents", nullable = false)
     private Integer amountCents;

@@ -1,0 +1,1 @@
+ALTER TABLE purchases RENAME COLUMN stripe_session_id TO provider_session_id;

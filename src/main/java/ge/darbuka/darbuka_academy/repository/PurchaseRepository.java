@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
     boolean existsByUserIdAndCourseIdAndStatus(Long userId, Long courseId, PurchaseStatus status);
-    Optional<Purchase> findByStripeSessionId(String stripeSessionId);
+    Optional<Purchase> findByProviderSessionId(String sessionId);
     List<Purchase> findAllByUserIdAndStatus(Long userId, PurchaseStatus status);
 }
