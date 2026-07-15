@@ -24,11 +24,25 @@
         <iframe class="w-full h-full"
                 th:src="'https://www.youtube.com/embed/' + ${lesson.videoId}"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
-                allowfullscreen></iframe>
+                allowfullscreen>
+
+        </iframe>
     </div>
 
     <h1 class="mt-8 text-3xl font-semibold tracking-tight" th:text="${lesson.title}">Title</h1>
     <p class="mt-3 text-neutral-400" th:text="${lesson.description}">Description</p>
+
+    <form th:action="@{/courses/{level}/lessons/{id}/complete(level=${course.level}, id=${lesson.id})}"
+          method="post" class="mt-6">
+        <button th:if="${!completed}"
+                class="px-4 py-2 border border-neutral-800 rounded text-sm hover:border-neutral-600">
+            Mark as complete
+        </button>
+        <button th:if="${completed}"
+                class="px-4 py-2 border border-emerald-800 text-emerald-400 rounded text-sm hover:border-emerald-600">
+            ✓ Completed — mark incomplete
+        </button>
+    </form>
 
     <div class="mt-12 pt-6 border-t border-neutral-900 flex justify-between text-sm">
         <a th:if="${prev}"

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-950 text-neutral-100">
+
+<nav class="border-b border-neutral-900">
+    <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a th:href="@{/admin}" class="font-semibold">← Admin</a>
+        <span class="text-sm text-amber-500" th:text="${course.level}">LEVEL</span>
+    </div>
+</nav>
+
+<div class="max-w-4xl mx-auto px-6 py-12">
+
+    <h1 class="text-2xl font-semibold mb-6">Edit course</h1>
+
+    <form th:action="@{/admin/courses/{id}(id=${course.id})}" method="post" class="space-y-4 max-w-lg">
+        <label class="block">
+            <span class="text-sm text-neutral-400">Title</span>
+            <input name="title" th:value="${course.title}" required
+                   class="mt-1 w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        </label>
+        <label class="block">
+            <span class="text-sm text-neutral-400">Description</span>
+            <textarea name="description" rows="3"
+                      class="mt-1 w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded"
+                      th:text="${course.description}"></textarea>
+        </label>
+        <label class="block">
+            <span class="text-sm text-neutral-400">Price (cents)</span>
+            <input name="priceCents" type="number" th:value="${course.priceCents}" required
+                   class="mt-1 w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        </label>
+        <label class="block">
+            <span class="text-sm text-neutral-400">Thumbnail URL</span>
+            <input name="thumbnailUrl" th:value="${course.thumbnailUrl}"
+                   class="mt-1 w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        </label>
+        <label class="flex items-center gap-2">
+            <input name="active" type="checkbox" th:checked="${course.active}">
+            <span class="text-sm text-neutral-400">Active</span>
+        </label>
+        <button class="px-5 py-2 bg-amber-500 text-neutral-950 font-medium rounded">Save course</button>
+    </form>
+
+    <hr class="my-10 border-neutral-900">
+
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-medium">Lessons</h2>
+    </div>
+
+    <div class="border border-neutral-900 rounded-lg divide-y divide-neutral-900 mb-8">
+        <div th:each="lesson : ${lessons}" class="flex items-center gap-4 px-5 py-3">
+            <span class="w-6 text-sm text-neutral-600" th:text="${lesson.position}">1</span>
+            <span class="flex-1" th:text="${lesson.title}">Title</span>
+            <span th:if="${lesson.freePreview}" class="text-xs text-amber-500">free</span>
+            <a th:href="@{/admin/lessons/{id}/edit(id=${lesson.id})}"
+               class="text-sm text-neutral-400 hover:text-neutral-100">Edit</a>
+            <form th:action="@{/admin/lessons/{id}/delete(id=${lesson.id})}" method="post"
+                  onsubmit="return confirm('Delete this lesson?');">
+                <button class="text-sm text-red-400 hover:text-red-300">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <h3 class="text-md font-medium mb-3">Add a lesson</h3>
+    <form th:action="@{/admin/courses/{id}/lessons(id=${course.id})}" method="post" class="space-y-3 max-w-lg">
+        <input name="title" placeholder="Title" required
+               class="w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        <input name="description" placeholder="Description"
+               class="w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        <input name="videoId" placeholder="YouTube video ID" required
+               class="w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        <div class="flex gap-3">
+            <input name="durationSeconds" type="number" placeholder="Duration (sec)" required
+                   class="flex-1 px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+            <input name="position" type="number" placeholder="Position" required
+                   class="flex-1 px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        </div>
+        <label class="flex items-center gap-2">
+            <input name="freePreview" type="checkbox">
+            <span class="text-sm text-neutral-400">Free preview</span>
+        </label>
+        <button class="px-5 py-2 bg-amber-500 text-neutral-950 font-medium rounded">Add lesson</button>
+    </form>
+
+</div>
+
+</body>
+</html>
