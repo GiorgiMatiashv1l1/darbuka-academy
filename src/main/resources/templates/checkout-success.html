@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment received</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-950 text-neutral-100 min-h-screen flex items-center justify-center">
+<div class="max-w-md text-center px-6">
+    <div class="text-5xl mb-6">🎉</div>
+    <h1 class="text-2xl font-semibold">Payment received</h1>
+    <p class="mt-3 text-neutral-400">
+        Your course is unlocked. It may take a few seconds to appear.
+    </p>
+    <a th:href="@{/my-courses}"
+       class="inline-block mt-8 px-6 py-3 bg-amber-500 text-neutral-950 font-medium rounded">
+        Go to my courses
+    </a>
+</div>
+</body>
+</html>
