@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit lesson</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-950 text-neutral-100">
+
+<nav class="border-b border-neutral-900">
+    <div class="max-w-4xl mx-auto px-6 h-16 flex items-center">
+        <a th:href="@{/admin/courses/{id}(id=${lesson.course.id})}" class="font-semibold">← Back to course</a>
+    </div>
+</nav>
+
+<div class="max-w-lg mx-auto px-6 py-12">
+    <h1 class="text-2xl font-semibold mb-6">Edit lesson</h1>
+
+    <form th:action="@{/admin/lessons/{id}(id=${lesson.id})}" method="post" class="space-y-4">
+        <input name="title" th:value="${lesson.title}" required
+               class="w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        <textarea name="description" rows="3"
+                  class="w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded"
+                  th:text="${lesson.description}"></textarea>
+        <input name="videoId" th:value="${lesson.videoId}" required
+               class="w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        <div class="flex gap-3">
+            <input name="durationSeconds" type="number" th:value="${lesson.durationSeconds}" required
+                   class="flex-1 px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+            <input name="position" type="number" th:value="${lesson.position}" required
+                   class="flex-1 px-3 py-2 bg-neutral-900 border border-neutral-800 rounded">
+        </div>
+        <label class="flex items-center gap-2">
+            <input name="freePreview" type="checkbox" th:checked="${lesson.freePreview}">
+            <span class="text-sm text-neutral-400">Free preview</span>
+        </label>
+        <button class="px-5 py-2 bg-amber-500 text-neutral-950 font-medium rounded">Save lesson</button>
+    </form>
+</div>
+
+</body>
+</html>
