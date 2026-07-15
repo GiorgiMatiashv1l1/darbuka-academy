@@ -11,17 +11,20 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/webhooks/**"))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/webhooks/**").permitAll()
                         .requestMatchers("/", "/courses/**", "/register", "/login",
-                                "/css/**", "/js/**", "/images/**").permitAll().requestMatchers("/admin/**")
-                        .hasRole("ADMIN").anyRequest().authenticated()
+                                "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
